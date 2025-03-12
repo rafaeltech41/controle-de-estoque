@@ -1,74 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atualização de Tabela</title>
-  <style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-    }
-    th {
-        background-color: #f4f4f4;
-    }
-    img {
-        max-width: 50px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+        rel="stylesheet">
+
 </head>
+
 <body>
-<h1>Registros de Acesso</h1>
-<table>
-  <thead>
-  <tr>
-    <th>Nome</th>
-    <th>Horário</th>
-    <th>Imagem</th>
-  </tr>
-  </thead>
-  <tbody id="registros">
-  <!-- Registros serão carregados dinamicamente aqui -->
-  </tbody>
-</table>
+    <header>
+        <h1>minha loja 1.0</h1>
+    </header>
+    <main>
 
-<script>
-  // Função para carregar os dados da tabela diretamente do servidor
-  function carregarDados() {
-      fetch('/atualizacao') // Faz uma requisição para o handler Java no servidor
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error('Erro ao buscar dados: ' + response.statusText);
-              }
-              return response.json();
-          })
-          .then(data => {
-              let html = '';
+        <div class="title">
+            <h2>Produtos</h2>
+            <span>lista de produtos da minha loja</span>
+        </div>
 
-              // Constrói o HTML das linhas da tabela
-              data.forEach(registro => {
-                  html += `<tr>
-                              <td><img src="${registro.imagem}" alt="Imagem"></td>
-                              <td>${registro.nome}</td>
-                              <td>${registro.horario}</td>
-                          </tr>`;
-              });
+        <div class="card">
+            <div class="lineInput">
+                <label>Produto</label>
+                <input type="text" id="produto" placeholder="nome do produto">
+            </div>
+            <div class="lineInput">
+                <label>Preço</label>
+                <input type="text" id="preco" placeholder="valor do produto">
+            </div>
+            <button onclick="produto.salvar()">Salvar</button>
+            <button onclick="produto.cancelar()">Cancelar</button>
+        </div>
+        <div class="content">
+            <table border="1">
+                <thead>
+                    <th class="center">Id</th>
+                    <th>Produto</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                </thead>
+                <tbody id="tbody">
+                    
+                </tbody>
+            </table>
+        </div>
 
-              // Atualiza a tabela
-              document.getElementById('registros').innerHTML = html;
-          })
-          .catch(error => console.error('Erro:', error));
-  }
+    </main>
 
-  // Atualiza a tabela ao carregar a página
-  carregarDados();
-
-  // Atualiza a tabela a cada 2 segundos
-  setInterval(carregarDados, 2000);
-</script>
+    </div>
+    <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
